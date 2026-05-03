@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>账号注册</title>
+  <link rel="stylesheet" href="sty4.css">
+
+
+  <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.19/libs/cn/index.js"></script>
+
+    <style>
+        /* 自定义Coze聊天窗口样式，适配你的网站风格 */
+        #coze-webchat {
+            position: fixed !important;
+            bottom: 25px !important;
+            right: 25px !important;
+            z-index: 9999 !important;
+        }
+        /* 🔥 放大悬浮按钮 + 主题美化（完全保留你的设置） */
+        #coze-webchat .coze-webchat-float-button {
+            width: 100px !important;
+            height: 100px !important;
+            background-color: #2E7D32 !important;
+            border-radius: 50% !important;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.4) !important;
+            transition: all 0.3s ease !important;
+        }
+        /* 鼠标悬浮时轻微放大（完全保留） */
+        #coze-webchat .coze-webchat-float-button:hover {
+            transform: scale(1.08) !important;
+        }
+        /* 聊天窗口主题色统一 */
+        #coze-webchat .coze-webchat-window-header {
+            background-color: #2E7D32 !important;
+        }
+    </style>
+
+
+</head>
+<body>
+<div class="content">
+  <div class="login-content">
+    <a href=" " class="banner-box"></a >
+
+    <div class="login-box">
+      <h1>账号注册</h1>
+      <input type="text" placeholder="请输入账号" id="regUser">
+      <input type="email" placeholder="请输入邮箱（找回密码用）" id="regEmail">
+      <input type="password" placeholder="请输入密码" id="regPwd">
+      <input type="password" placeholder="确认密码" id="regPwd2">
+      <button class="login-btn" id="regBtn">注册</button>
+      <p class="switch">已有账号？<a href="index1.html" style="color:#0077ff;text-decoration:none;">返回登录</a ></p >
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('regBtn').addEventListener('click', async ()=>{
+    // 获取输入值
+    let username = document.getElementById('regUser').value.trim()
+    let email = document.getElementById('regEmail').value.trim()
+    let password = document.getElementById('regPwd').value.trim()
+    let password2 = document.getElementById('regPwd2').value.trim()
+
+    // 前端校验
+    if (!username || !email || !password || !password2) {
+      alert('请填写完整注册信息')
+      return
+    }
+    if (password !== password2) {
+      alert('两次输入的密码不一致')
+      return
+    }
+
+    // ✅ 【关键修改】改成本地后端地址！！！
+    let res = await fetch("http://localhost:3001/api/register", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        username: username,
+        email: email,
+        password: password
+      })
+    })
+    let data = await res.json()
+    alert(data.msg)
+    // 注册成功自动跳回登录页
+    if(data.code === 200){
+      window.location.href = "index1.html"
+    }
+  })
+</script>
+
+
+<script src="./index.js"></script>
+<!-- 嵌入Coze智能体聊天窗口 + ✅ 原生title提示（光标一放必显示） -->
+<script>
+  new CozeWebSDK.WebChatClient({
+    config: {
+      bot_id: '7634345885346545679',
+    },
+    componentProps: {
+      title: '滇境生灵智能助手',
+      layout: "float",
+      tooltip: "滇境生灵智能助手"  // ✅ 这里直接设置原生提示，100%生效
+    },
+    auth: {
+      type: 'token',
+      token: 'pat_EtNINqzwFkGGlgx7j8NbVaMS2oGRNMKBsAIWWVUmdzjQeku0KyoxHPwEvFY3wsd3',
+      onRefreshToken: function () {
+        return 'pat_EtNINqzwFkGGlgx7j8NbVaMS2oGRNMKBsAIWWVUmdzjQeku0KyoxHPwEvFY3wsd3'
+      }
+    }
+  });
+
+  // ✅ 强制给按钮加上原生title，兜底必生效
+  setTimeout(() => {
+    const btn = document.querySelector('.coze-webchat-float-button');
+    if(btn) btn.title = "滇境生灵智能助手";
+  }, 1000);
+</script>
+
+
+</body>
+</html>

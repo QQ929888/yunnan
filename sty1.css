@@ -1,0 +1,252 @@
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 页面背景图 */
+body {
+    background: url("animal.jpg") center/cover no-repeat fixed !important;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* 顶部导航栏样式（改为透明背景） */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    padding: 15px 25px;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+
+    /* 降低导航栏层级，避免挡住助手弹窗 */
+    position: relative;
+    z-index: 999;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    flex: 0 0 auto;
+}
+
+.nav-center{
+    display: flex;
+    flex:1;
+    justify-content: center;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    padding:0;
+    margin:0;
+}
+
+.nav-menu li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0 20px;
+    font-size: 16px;
+}
+
+.nav-menu li a.active {
+    color: #4CAF50;
+}
+
+.nav-right{
+    display: flex;
+    align-items: center;
+    gap:20px;
+}
+/*搜索框*/
+.search-container {
+    position: relative; /* 下拉框绝对定位的父容器 */
+    display: flex;
+    align-items: center;
+}
+.search-icon {
+    position: absolute;
+    left: 16px;
+    font-size: 20px;
+    color: #666;
+    z-index: 1;
+}
+
+.search-input {
+    width: 250px; /* 放大搜索框宽度 */
+    height: 30px;
+    padding: 0 16px 0 44px; /* 左边留位置给图标 */
+    border: none;
+    border-radius: 24px; /* 圆角 */
+    background: rgba(255,255,255,0.95);
+    font-size: 16px;
+    outline: none;
+}
+
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 250px; /* 和搜索框同宽 */
+    margin-top: 8px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    list-style: none;
+    max-height: 300px; /* 最大高度，超出可滚动 */
+    overflow-y: auto;
+    display: none; /* 默认隐藏 */
+    z-index: 9999;
+}
+.search-suggestions li {
+    padding: 12px 16px;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.search-suggestions li:hover,
+.search-suggestions li.active {
+    background: #f0f7ff;
+}
+
+
+.user {
+    margin-left: auto; /* 把登录按钮推到最右边 */
+}
+
+/* 卡片容器 */
+.animal-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  padding: 30px 0;
+}
+
+/* 单个卡片样式 */
+.animal-card {
+  width: 90%;
+  max-width: 400px;
+  aspect-ratio: 1 / 1;
+  text-align: center;
+}
+
+.animal-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* 动物名称样式（白色、放大、居中） */
+.animal-card p {
+    padding: 8px 0;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.animal-card a {
+    text-decoration: none;
+}
+
+/* 鼠标悬停上浮效果 */
+.animal-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    transition: all 0.3s ease;
+}
+
+/* 鼠标按压下沉效果 */
+.animal-card:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* ======================
+   用户下拉菜单
+====================== */
+.user-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.user-btn {
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px 12px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* 下拉菜单默认隐藏，JS 控制显示 */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #ffffff;
+  min-width: 140px;
+  border-radius: 4px;
+  z-index: 999;
+  border: 1px solid #e0e0e0;
+  display: none;
+}
+
+/* JS 控制显示 */
+.user-dropdown.active .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  text-shadow: none;
+}
+
+.dropdown-menu a:hover {
+  background: #f5f5f5;
+}
+
+/* 退出登录红色 */
+.logout-item {
+  color: #e53935 !important;
+}
+
+/* ======================
+   【修复版】滇灵助手弹窗样式
+====================== */
+/* 匹配助手弹窗的所有可能容器，只设层级，不强制修改位置 */
+[class*="滇境生灵智能助手"],
+.dianling-assistant,
+.assistant-container,
+iframe[src*="滇境生灵"],
+div[role="dialog"] {
+    /* 1. 全站最高层级，确保不会被任何元素挡住 */
+    z-index: 9999999 !important;
+    /* 2. 保持它原有的定位方式，不强制居中 */
+    position: fixed !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    /* 3. 限制弹窗大小，防止撑满全屏 */
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    box-sizing: border-box !important;
+}

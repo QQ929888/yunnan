@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Arial,sans-serif";
+}
+
+.content {
+    width: 100vw;
+    height: 100vh;
+    background: url(denglu1.jpg) no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-content {
+    position: relative;
+    width: 800px;
+    height: 360px;
+    background: linear-gradient(180deg, rgb(23, 133, 130) 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 30px;
+    padding: 30px;
+}
+
+.banner-box {
+    display: inline-block;
+    width: 500px;
+    height: 100%;
+    background: url(denglu2.jpg) no-repeat;
+    background-size: cover;
+    border-radius: 20px 0 0 20px;
+}
+
+/* 登录框 */
+.login-box {
+    width: 300px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 0 30px 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 注册框（默认隐藏） */
+.reg-box {
+    width: 300px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 0 30px 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    display: none; /* 默认隐藏 */
+}
+
+.login-box>h1, .reg-box>h1 {
+    font-size: 30px;
+    margin: 40px 0 20px 0;
+    color: aliceblue;
+}
+
+.login-box>input, .reg-box>input {
+    margin-bottom: 15px;
+    width: 200px;
+    height: 36px;
+    padding: 0 20px;
+    border-radius: 36px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+/* 👇 这里是修改后的按钮样式，加了按压效果 */
+.login-btn {
+    margin-top: 10px;
+    width: 200px;
+    height: 40px;
+    border-radius: 40px;
+    background-color: #2daaa6;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+
+    /* 关键：加过渡动画，让下沉/上浮更丝滑 */
+    transition: all 0.2s ease;
+}
+
+/* 点击按住时：下沉效果 */
+.login-btn:active {
+    transform: scale(0.95);   /* 轻微缩小，模拟按下去 */
+    opacity: 0.9;              /* 稍微变暗，增强真实感 */
+    /* 如果你想要“往下移”的下沉感，用下面这行替换上面两行：
+    transform: translateY(2px);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+    */
+}
+
+.switch {
+    margin-top: 15px;
+    color: aliceblue;
+    font-size: 14px;
+}
+
+.switch span {
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* 响应式 */
+@media screen and (max-width: 900px) {
+    .login-content {
+        margin: 0 30px;
+    }
+    .banner-box {
+        border-radius: 20px;
+    }
+    .login-box, .reg-box {
+        background-color: #2daaa6;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .content {
+        background: url(denglu2.jpg) no-repeat center;
+    }
+    .login-content {
+        background-color: transparent;
+    }
+    .banner-box {
+        display: none;
+    }
+    .login-box, .reg-box {
+        position: initial;
+        margin: auto;
+        background-color: transparent;
+    }
+}
