@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>云南澄广花</title>
+    <link rel="stylesheet" href="border.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+
+
+<script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.19/libs/cn/index.js"></script>
+
+    <style>
+        /* 自定义Coze聊天窗口样式，适配你的网站风格 */
+        #coze-webchat {
+            position: fixed !important;
+            bottom: 25px !important;
+            right: 25px !important;
+            z-index: 9999 !important;
+        }
+        /* 🔥 放大悬浮按钮 + 主题美化（完全保留你的设置） */
+        #coze-webchat .coze-webchat-float-button {
+            width: 100px !important;
+            height: 100px !important;
+            background-color: #2E7D32 !important;
+            border-radius: 50% !important;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.4) !important;
+            transition: all 0.3s ease !important;
+        }
+        /* 鼠标悬浮时轻微放大（完全保留） */
+        #coze-webchat .coze-webchat-float-button:hover {
+            transform: scale(1.08) !important;
+        }
+        /* 聊天窗口主题色统一 */
+        #coze-webchat .coze-webchat-window-header {
+            background-color: #2E7D32 !important;
+        }
+    </style>
+
+
+</head>
+<body>
+<!-- 顶部导航栏 -->
+<nav class="navbar">
+    <div class="logo">
+
+        <span>云南珍稀动植物库</span>
+    </div>
+    <ul class="nav-menu">
+        <li><a href="index2.html">首页</a ></li>
+        <li><a href="plant.html">植物库</a ></li>
+        <li><a href="animal.html">动物库</a ></li>
+        <li><a href="taolun.html">讨论</a ></li>
+    </ul>
+
+
+    <div class="nav-right">
+        <div class="search-container">
+            <i class="fa-brands fa-sistrix search-icon" style="flex:0 0 6vw;"></i>
+            <input type="text" class="search-input" placeholder="搜索动植物..." autocomplete="off">
+            <!-- 改动3：搜索联想下拉框 -->
+            <ul class="search-suggestions" >
+                <!-- 联想项会由JS动态生成 -->
+            </ul>
+        </div>
+        <!-- 点击触发下拉 -->
+        <div class="user-dropdown">
+            <span class="user-btn">用户</span>
+            <!-- 下拉菜单 -->
+            <div class="dropdown-menu">
+                <a href="shoucang.html" class="history-item">收藏</a >
+                <a href=" " class="history-item">用户信息</a >
+                <a href="index.html" class="logout-item">退出登录</a >
+            </div>
+        </div>
+    </div>
+</nav>
+
+<script>
+    const userBtn = document.querySelector('.user-btn');
+    const dropdown = document.querySelector('.user-dropdown');
+
+    userBtn.addEventListener('click', () => {
+        dropdown.classList.toggle('active');
+    });
+
+    // 点击页面其他地方关闭
+    document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('active');
+        }
+    });
+</script>
+
+<!-- 主内容区 -->
+<div class="main-container">
+    <!-- 左侧介绍区 -->
+    <div class="left-panel">
+        <div class="info-item">
+            <div class="icon-circle">📇</div>
+            <div class="name-group">
+                <span class="cn-name">基础名片</span>
+                <span class="en-name">Basic Info</span>
+            </div>
+            <div class="info-tooltip">
+                <strong>云南澄广花</strong><br>
+                学名：Orophea yunnanensis<br>
+                科属：番荔枝科澄广花属<br>
+                保护级别：极危（CR）
+            </div>
+        </div>
+        <div class="info-item">
+            <div class="icon-circle">🌿</div>
+            <div class="name-group">
+                <span class="cn-name">形态特征</span>
+                <span class="en-name">Morphology</span>
+            </div>
+            <div class="info-tooltip">
+                <strong>形态特征</strong><br>
+                常绿大乔木；<br>
+                株：常绿灌木（野外岩壁上植株可达7米），高约2米，树皮淡黑色，枝条无毛；<br>
+                叶：叶革质，长椭圆形，长2.5-7.5cm，侧脉细密（10-15对），两面凸起；<br>
+                花：花小（直径约3mm），黄绿色，2朵丛生叶腋，花期4月；<br>
+                果：果实为浆果，每心皮含3颗胚珠，果期6月左右；<br>
+            </div>
+        </div>
+        <div class="info-item">
+            <div class="icon-circle">🌱</div>
+            <div class="name-group">
+                <span class="cn-name">生长环境</span>
+                <span class="en-name">Habitat</span>
+            </div>
+            <div class="info-tooltip">
+                <strong>生长环境</strong><br>
+                产地：云南特有，仅分布于云南中部及西部，模式标本采自玉溪市澄江市；<br>
+                特有：中国云南特有物种，属于番荔枝科极小种群狭域植物；<br>
+                生境：要生长于喀斯特石灰岩山地、沟谷边坡、灌丛中或岩壁缝隙间，依附湿润且排水良好的岩石生境；<br>
+                海拔：1300-1900m；<br>
+                物候：花期4月，果期6-7月；花小，两性花，单生或2-3朵簇生于叶腋；
+            </div>
+        </div>
+        <div class="info-item">
+            <div class="icon-circle">💊</div>
+            <div class="name-group">
+                <span class="cn-name">价值作用</span>
+                <span class="en-name">Value</span>
+            </div>
+            <div class="info-tooltip">
+                <strong>价值作用</strong><br>
+                药用价值:<br>
+                含三萜类、黄酮类等活性成分，同属植物具抗炎、抗氧化、抗菌潜力。<br>
+                研究价值:<br>
+                番荔枝科的原始类群，对研究被子植物系统发育、古植物区系演化意义重大。仅生于喀斯特石灰岩山地，是研究植物极端环境适应机制的关键材料。
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 中间图片展示区 -->
+    <div class="center-panel">
+        <img src="chengguang.jpg"
+             alt="云南澄广花" class="main-image" id="mainImg">
+        <div class="image-slider-container">
+            <div class="image-slider">
+                <img src="chengguang.jpg" alt="云南澄广花特写"
+                     class="slider-item active" onclick="changeImage(this)">
+                <img src="chengguang1.jpg" alt="云南澄广花特写"
+                     class="slider-item" onclick="changeImage(this)">
+                <img src="chengguang2.jpg" alt="云南澄广花特写"
+                     class="slider-item" onclick="changeImage(this)">
+                <img src="chengguang3.jpg" alt="云南澄广花特写"
+                     class="slider-item" onclick="changeImage(this)">
+            </div>
+            <div class="favorite-btn" id="favoriteBtn">
+    <i class="fa-regular fa-heart"></i>
+</div>
+        </div>
+    </div>
+
+    <!-- 右侧数据分析区（上下两个图表） -->
+    <div class="right-panel">
+        <div class="chart-container">
+            <div class="chart" id="distributionChart">
+                <canvas id="distributionCanvas"></canvas>
+            </div>
+            <p class="chart-desc">野生云南澄广花种群云南地区分布</p >
+        </div>
+        <div class="chart-container">
+            <div class="chart" id="trendChart">
+                <canvas id="trendCanvas"></canvas>
+            </div>
+            <p class="chart-desc">野生云南澄广花种群数量变化</p >
+        </div>
+    </div>
+</div>
+
+<!-- 底部联系栏 -->
+<div class="bottom-contact">
+    如有问题，请联系我们：2958508614@qq.com
+</div>
+
+<script>
+    // 切换主图与背景
+    function changeImage(el) {
+        const mainImg = document.getElementById('mainImg');
+        mainImg.src = el.src;
+        document.body.style.backgroundImage = `url(${el.src})`;
+        document.querySelectorAll('.slider-item').forEach(item => item.classList.remove('active'));
+        el.classList.add('active');
+    }
+
+    // 初始化背景图
+    document.body.style.backgroundImage = 'url(chengguang.jpg)';
+
+    // 初始化图表（DOM加载完成后执行）
+    document.addEventListener('DOMContentLoaded', function() {
+        // 分布柱状图
+        const distributionCtx = document.getElementById('distributionCanvas').getContext('2d');
+        new Chart(distributionCtx, {
+            type: 'bar',
+            data: {
+                labels: ['澄江笔架山', '永平金光寺', '南涧县'],
+                datasets: [{
+                    label: '云南澄广花（株）',
+                    data: [75, 20, 32],
+                    backgroundColor: '#004d26',
+                    borderColor: '#00331a',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true }
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: 'white' }
+                    }
+                }
+            }
+        });
+
+        // 趋势折线图
+        const trendCtx = document.getElementById('trendCanvas').getContext('2d');
+        new Chart(trendCtx, {
+            type: 'line',
+            data: {
+                labels: ['1940年', '1920-2000s', '2016年', '2024-2025年', '2026年'],
+                datasets: [{
+                    label: '云南澄广花（株）',
+                    data: [1, 1, 44, 90, 100],
+                    borderColor: '#004d26',
+                    backgroundColor: 'rgba(0,77,38,0.2)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true }
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: 'white' }
+                    }
+                }
+            }
+        });
+    });
+</script>
+<script>
+    // 1. 获取DOM元素（必须先获取，再绑定事件！）
+    const searchInput = document.querySelector('.search-input');
+    const searchSuggestions = document.querySelector('.search-suggestions');
+    let activeIndex = -1; // 键盘上下键选中的索引
+
+    // 2. 输入框输入事件：请求后端接口
+    searchInput.addEventListener('input', async function() {
+        const keyword = this.value.trim();
+        searchSuggestions.innerHTML = '';
+        activeIndex = -1;
+
+        // 输入为空，隐藏下拉
+        if (!keyword) {
+            searchSuggestions.style.display = 'none';
+            return;
+        }
+
+        try {
+            // 向后端接口发送请求
+            let res = await fetch(`http://47.108.20.237:3000/api/search?keyword=${encodeURIComponent(keyword)}`);
+            let filtered = await res.json();
+
+            // 无结果
+            if (filtered.length === 0) {
+                searchSuggestions.innerHTML = '<li style="color:#999;">暂无结果</li>';
+                searchSuggestions.style.display = 'block';
+                return;
+            }
+
+            // 渲染联想列表
+            filtered.forEach((item) => {
+                const li = document.createElement('li');
+                li.textContent = item.name;
+                li.dataset.url = item.url;
+                li.addEventListener('click', () => {
+                    window.location.href = item.url;
+                    searchSuggestions.style.display = 'none';
+                    searchInput.value = '';
+                });
+                searchSuggestions.appendChild(li);
+            });
+
+            searchSuggestions.style.display = 'block';
+
+        } catch (err) {
+            console.log('接口请求失败：', err);
+            searchSuggestions.innerHTML = '<li style="color:#999;">加载失败</li>';
+            searchSuggestions.style.display = 'block';
+        }
+    });
+
+    // 3. 键盘上下键选择联想项
+    searchInput.addEventListener('keydown', function(e) {
+        const items = searchSuggestions.querySelectorAll('li');
+        if (!items.length) return;
+
+        // 上键
+        if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            activeIndex = activeIndex > 0 ? activeIndex - 1 : items.length - 1;
+            updateActiveItem(items);
+        }
+        // 下键
+        else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            activeIndex = activeIndex < items.length - 1 ? activeIndex + 1 : 0;
+            updateActiveItem(items);
+        }
+        // 回车跳转
+        else if (e.key === 'Enter' && activeIndex >= 0) {
+            const url = items[activeIndex].dataset.url;
+            if (url) window.location.href = url;
+            searchSuggestions.style.display = 'none';
+            searchInput.value = '';
+        }
+    });
+
+    // 更新选中项样式并自动滚动
+    function updateActiveItem(items) {
+        items.forEach((item, index) => {
+            item.classList.toggle('active', index === activeIndex);
+            if (index === activeIndex) {
+                item.scrollIntoView({ block: 'nearest' });
+            }
+        });
+    }
+
+    // 点击页面其他地方关闭下拉框
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.search-container')) {
+            searchSuggestions.style.display = 'none';
+        }
+    });
+</script>
+<script>
+    // ======================
+    // 爱心收藏 + 同步收藏页（完美版）
+    // ======================
+    const favoriteBtn = document.getElementById('favoriteBtn');
+    const heartIcon = favoriteBtn.querySelector('i');
+
+    // ========== 配置区（每页只改这里） ==========
+    const TYPE = 'plant';      // 植物页：plant，动物页：animal
+    const pageTitle = '云南澄广花'; // 当前页面名字
+    const pageUrl = window.location.href;
+    // ==========================================
+
+    // 获取收藏列表
+    function getFav() {
+        return JSON.parse(localStorage.getItem(TYPE + 'Favorites') || '[]');
+    }
+
+    // 保存收藏列表
+    function setFav(arr) {
+        localStorage.setItem(TYPE + 'Favorites', JSON.stringify(arr));
+    }
+
+    // 初始化爱心状态
+    function initHeart() {
+        let list = getFav();
+        let has = list.some(item => item.url === pageUrl);
+        if (has) {
+            heartIcon.className = 'fa-solid fa-heart'; // 红
+        } else {
+            heartIcon.className = 'fa-regular fa-heart'; // 白
+        }
+    }
+    initHeart();
+
+    // 点击爱心
+    favoriteBtn.onclick = function () {
+        let list = getFav();
+        let index = list.findIndex(item => item.url === pageUrl);
+
+        if (index === -1) {
+            // 新增收藏
+            list.push({ title: pageTitle, url: pageUrl });
+            heartIcon.className = 'fa-solid fa-heart';
+        } else {
+            // 取消收藏：删除这一项
+            list.splice(index, 1);
+            heartIcon.className = 'fa-regular fa-heart';
+        }
+
+        setFav(list); // 保存到本地
+        initHeart(); // 刷新状态
+    };
+</script>
+
+
+<script src="./index.js"></script>
+<!-- 嵌入Coze智能体聊天窗口 + ✅ 原生title提示（光标一放必显示） -->
+<script>
+  new CozeWebSDK.WebChatClient({
+    config: {
+      bot_id: '7634345885346545679',
+    },
+    componentProps: {
+      title: '滇境生灵智能助手',
+      layout: "float",
+      tooltip: "滇境生灵智能助手"  // ✅ 这里直接设置原生提示，100%生效
+    },
+    auth: {
+      type: 'token',
+      token: 'pat_EtNINqzwFkGGlgx7j8NbVaMS2oGRNMKBsAIWWVUmdzjQeku0KyoxHPwEvFY3wsd3',
+      onRefreshToken: function () {
+        return 'pat_EtNINqzwFkGGlgx7j8NbVaMS2oGRNMKBsAIWWVUmdzjQeku0KyoxHPwEvFY3wsd3'
+      }
+    }
+  });
+
+  // ✅ 强制给按钮加上原生title，兜底必生效
+  setTimeout(() => {
+    const btn = document.querySelector('.coze-webchat-float-button');
+    if(btn) btn.title = "滇境生灵智能助手";
+  }, 1000);
+</script>
+
+
+</body>
+</html>

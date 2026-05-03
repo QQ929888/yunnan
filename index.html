@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云南珍稀动植物库</title>
+    <link rel="stylesheet" href="sty3.css">
+    <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+
+
+    <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.19/libs/cn/index.js"></script>
+
+    <style>
+        /* 自定义Coze聊天窗口样式，适配你的网站风格 */
+        #coze-webchat {
+            position: fixed !important;
+            bottom: 25px !important;
+            right: 25px !important;
+            z-index: 9999 !important;
+        }
+        /* 🔥 放大悬浮按钮 + 主题美化（完全保留你的设置） */
+        #coze-webchat .coze-webchat-float-button {
+            width: 100px !important;
+            height: 100px !important;
+            background-color: #2E7D32 !important;
+            border-radius: 50% !important;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.4) !important;
+            transition: all 0.3s ease !important;
+        }
+        /* 鼠标悬浮时轻微放大（完全保留） */
+        #coze-webchat .coze-webchat-float-button:hover {
+            transform: scale(1.08) !important;
+        }
+        /* 聊天窗口主题色统一 */
+        #coze-webchat .coze-webchat-window-header {
+            background-color: #2E7D32 !important;
+        }
+    </style>
+
+
+</head>
+<body>
+
+<!-- 顶部导航栏 -->
+<nav class="navbar">
+    <div class="logo">
+
+        <span>云南珍稀动植物库</span>
+    </div>
+    <ul class="nav-menu">
+        <li><a href=" " class="active">首页</a></li>
+        <li><a href="#">植物库</a></li>
+        <li><a href="#">动物库</a></li>
+        <li><a href="#">讨论</a></li>
+
+    </ul>
+    <div class="nav-right" >
+        <div class="search-container">
+            <i class="fa-brands fa-sistrix search-icon" style="flex:0 0 6vw;"></i>
+            <input type="text" class="search-input" placeholder="搜索动植物..." autocomplete="off">
+        </div>
+        <div class="user-links">
+            <a href="index1.html" style="color:white">登录</a>
+            <a href="register.html" style="color:white">注册</a>
+        </div>
+
+    </div>
+</nav>
+
+<!-- 大图背景区域 -->
+<section class="banner">
+    <div class="banner-content">
+        <div class="banner-title">
+
+            <h1>云南珍稀动植物库</h1>
+        </div>
+        <p>云南素有"动植物王国"美誉，是中国生物多样性最丰富的省份，拥有全国50％以上的动植物种类，
+            其中大量物种为云南特有、珍稀濒危。本库系统收录云南境内珍稀、特有、濒危动植物资源，涵盖物种信息、
+            分布区域、保护现状、生态价值等内容，为科研、教育、保护提供权威数据支持，助力生物多样性保护与生态文明建设。</p>
+        <div class="search-box">
+<!--            <input type="text" placeholder="搜索">-->
+<!--            <button>搜索</button>-->
+        </div>
+    <!-- 两个卡片区域 -->
+<section class="card-box">
+  <!-- 植物库卡片：图片写在HTML里，点击跳转到plant.html -->
+  <a href=" " class="card-link">
+    <div class="card1">
+      <img src="huagai.jpg" alt="植物库" class="card-img">
+      <div class="card-text">
+        <h3>植物库</h3>
+        <p>收录云南特有珍稀濒危植物，如华盖木、云南红豆杉等，展示独特植物资源与生态价值。</p >
+      </div>
+    </div>
+  </a >
+
+  <!-- 动物库卡片：图片写在HTML里，点击跳转到animal.html -->
+  <a href=" " class="card-link">
+    <div class="card2">
+      <img src="heiguanchangyuan.jpg" alt="动物库" class="card-img">
+      <div class="card-text">
+        <h3>动物库</h3>
+        <p>汇集滇金丝猴、亚洲象、绿孔雀等珍稀动物，呈现云南野生动物基因宝库的独特魅力。</p >
+      </div>
+    </div>
+  </a >
+</section>
+        </div>
+
+</section>
+
+
+<!-- 登录状态切换+下拉菜单JS（完全保留） -->
+<script>
+    // 页面加载时自动判断登录状态
+    window.onload = function() {
+        const username = localStorage.getItem("loginUsername");
+        const userContainer = document.getElementById("userContainer");
+
+        if (username) {
+            // 已登录：切换为用户下拉菜单
+            userContainer.innerHTML = `
+        <div class="user-dropdown">
+          <span class="user-btn">${username}</span>
+          <div class="dropdown-menu">
+            <a href="#" class="history-item">收藏</a >
+            <a href="javascript:logout()" class="logout-item">退出登录</a >
+          </div>
+        </div>
+      `;
+            // 绑定下拉事件
+            bindDropdownEvent();
+        }
+    }
+
+    // 下拉菜单交互函数
+    function bindDropdownEvent() {
+        const userBtn = document.querySelector('.user-btn');
+        const dropdown = document.querySelector('.user-dropdown');
+        userBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('active');
+        });
+        document.addEventListener('click', () => {
+            dropdown.classList.remove('active');
+        });
+    }
+
+    // 退出登录函数
+    function logout() {
+        localStorage.removeItem("loginUsername");
+        window.location.reload();
+    }
+</script>
+
+
+<script src="./index.js"></script>
+<!-- 嵌入Coze智能体聊天窗口 + ✅ 原生title提示（光标一放必显示） -->
+<script>
+  new CozeWebSDK.WebChatClient({
+    config: {
+      bot_id: '7634345885346545679',
+    },
+    componentProps: {
+      title: '滇境生灵智能助手',
+      layout: "float",
+      tooltip: "滇境生灵智能助手"  // ✅ 这里直接设置原生提示，100%生效
+    },
+    auth: {
+      type: 'token',
+      token: 'pat_EtNINqzwFkGGlgx7j8NbVaMS2oGRNMKBsAIWWVUmdzjQeku0KyoxHPwEvFY3wsd3',
+      onRefreshToken: function () {
+        return 'pat_EtNINqzwFkGGlgx7j8NbVaMS2oGRNMKBsAIWWVUmdzjQeku0KyoxHPwEvFY3wsd3'
+      }
+    }
+  });
+
+  // ✅ 强制给按钮加上原生title，兜底必生效
+  setTimeout(() => {
+    const btn = document.querySelector('.coze-webchat-float-button');
+    if(btn) btn.title = "滇境生灵智能助手";
+  }, 1000);
+</script>
+
+
+</body>
+</html>

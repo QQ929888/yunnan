@@ -1,0 +1,431 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft Yahei", sans-serif;
+}
+
+body {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    transition: background-image 0.5s ease;
+    background-color: rgba(0,0,0,0.3);
+    background-blend-mode: multiply;
+}
+
+/* 顶部导航栏 */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color:rgba(255,255,255,0.2);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    height: 70px;
+    color: #fff;
+    padding: 12px 30px;
+
+    /* 已修改：层级从99999降到999，不和助手抢层 */
+    position: relative;
+    z-index: 999;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    flex: 0 0 auto;
+}
+
+.nav-center{
+    display: flex;
+    flex:1;
+    justify-content: center;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    padding:0;
+    margin:0;
+}
+
+.nav-menu li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0 20px;
+    font-size: 16px;
+}
+
+.nav-menu li a.active {
+    color: #4CAF50;
+}
+.nav-right{
+    display: flex;
+    align-items: center;
+    gap:20px;
+}
+/*搜索框*/
+.search-container {
+    position: relative; /* 下拉框绝对定位的父容器 */
+    display: flex;
+    align-items: center;
+}
+.search-icon {
+    position: absolute;
+    left: 16px;
+    font-size: 20px;
+    color: #666;
+    z-index: 1;
+}
+
+.search-input {
+    width: 250px; /* 放大搜索框宽度 */
+    height: 30px;
+    padding: 0 16px 0 44px; /* 左边留位置给图标 */
+    border: none;
+    border-radius: 24px; /* 圆角 */
+    background: rgba(255,255,255,0.95);
+    font-size: 16px;
+    outline: none;
+}
+
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 250px; /* 和搜索框同宽 */
+    margin-top: 8px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    list-style: none;
+    max-height: 300px; /* 最大高度，超出可滚动 */
+    overflow-y: auto;
+    display: none; /* 默认隐藏 */
+    z-index: 9999;
+}
+.search-suggestions li {
+    padding: 12px 16px;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.search-suggestions li:hover,
+.search-suggestions li.active {
+    background: #f0f7ff;
+}
+
+
+.user a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+/* 用户下拉菜单 */
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: 99999;
+}
+
+.user-btn {
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px 12px;
+}
+
+/* 下拉菜单：绝对在最上层，不会被图表挡住 */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #ffffff;
+    min-width: 160px;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    display: none;
+    z-index: 999999 !important;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+/* 下拉显示 */
+.user-dropdown.active .dropdown-menu {
+    display: block;
+}
+
+/* 下拉选项样式 */
+.dropdown-menu a {
+    display: block;
+    padding: 12px 18px;
+    color: #333333;
+    text-decoration: none;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+
+.collect-item {
+    border-bottom: 1px solid #f0f0f0;
+    font-weight: 500;
+}
+
+.collect-item:hover {
+    background-color: #f5faf5;
+    color: #2e7d32;
+}
+
+.logout-item {
+    color: #d32f2f !important;
+    font-weight: 600;
+    background-color: #fff8f8;
+}
+
+.logout-item:hover {
+    background-color: #ffebee !important;
+    color: #c62828 !important;
+}
+
+/* 底部联系栏 */
+.bottom-contact {
+    background-color:rgba(255,255,255,0.2);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* 主内容区 */
+.main-container {
+    display: flex;
+    min-height: calc(100vh - 120px);
+    padding: 20px;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* 左侧介绍区 */
+.left-panel {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top:20px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+}
+
+.icon-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.name-group {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.cn-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.en-name {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.info-tooltip {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    width: 300px;
+    padding: 15px;
+    background-color: #f0f0f0;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: none;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.info-item:hover .info-tooltip {
+    display: block;
+}
+
+/* 中间图片展示区 */
+.center-panel {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.main-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border: 2px solid white;
+    border-radius: 8px;
+}
+
+.image-slider {
+    display: flex;
+    gap: 10px;
+}
+
+.slider-item {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border: 2px solid white;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.slider-item.active, .slider-item:hover {
+    opacity: 1;
+    border-color: #004d26;
+}
+
+/* 右侧数据分析区 */
+.right-panel {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.chart {
+    width: 100%;
+    height: 200px;
+    background-color: transparent;
+    border-radius: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+.chart canvas {
+    width: 100% !important;
+    height: 100% !important;
+    position: relative;
+    z-index: 1 !important;
+}
+
+.chart-desc {
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    font-size: 14px;
+}
+
+/*改动3：图片+收藏按钮的布局 */
+/* 图片轮播 + 收藏按钮 同一行 */
+.image-slider-container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 16px !important;
+    margin-top: 16px;
+}
+.image-slider {
+    display: flex;
+    gap: 10px;
+}
+.slider-item {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border: 2px solid transparent;
+    cursor: pointer;
+    border-radius: 6px;
+}
+.slider-item.active {
+    border-color: #fff;
+}
+
+/* 收藏按钮 */
+.favorite-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    font-size: 28px;
+}
+/* 未收藏：白色空心 */
+.fa-regular.fa-heart {
+    color: #ffffff !important;
+}
+/* 已收藏：红色实心 */
+.fa-solid.fa-heart {
+    color: #ff4444 !important;
+}
+
+/* ======================
+   助手全局置顶样式
+====================== */
+[class*="助手"],
+.assistant-box,
+.ai-popup,
+div[role="dialog"],
+iframe {
+    z-index: 9999999 !important;
+    position: fixed !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    box-sizing: border-box !important;
+}

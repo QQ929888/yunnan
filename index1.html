@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>登录/注册</title>
+    <link rel="stylesheet" href="sty4.css">
+
+
+    <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.2.0-beta.19/libs/cn/index.js"></script>
+
+    <style>
+        /* 自定义Coze聊天窗口样式，适配你的网站风格 */
+        #coze-webchat {
+            position: fixed !important;
+            bottom: 25px !important;
+            right: 25px !important;
+            z-index: 9999 !important;
+        }
+        /* 🔥 放大悬浮按钮 + 主题美化（完全保留你的设置） */
+        #coze-webchat .coze-webchat-float-button {
+            width: 100px !important;
+            height: 100px !important;
+            background-color: #2E7D32 !important;
+            border-radius: 50% !important;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.4) !important;
+            transition: all 0.3s ease !important;
+        }
+        /* 鼠标悬浮时轻微放大（完全保留） */
+        #coze-webchat .coze-webchat-float-button:hover {
+            transform: scale(1.08) !important;
+        }
+        /* 聊天窗口主题色统一 */
+        #coze-webchat .coze-webchat-window-header {
+            background-color: #2E7D32 !important;
+        }
+    </style>
+
+
+</head>
+<body>
+<div class="content">
+    <div class="login-content">
+        <a href=" " class="banner-box"></a >
+
+        <!-- 登录框 -->
+        <div class="login-box" id="loginBox">
+            <h1>账号登录</h1>
+            <input type="text" placeholder="账号" id="loginUser">
+            <input type="password" placeholder="密码" id="loginPwd">
+            <button class="login-btn" id="loginBtn">登录</button>
+            <p class="switch">没有账号？<a href="register.html" style="color:#0077ff;text-decoration:none;">去注册</a ></p >
+            <p class="switch"><a href="reset.html" style="color:#0077ff;text-decoration:none;">忘记密码？</a ></p >
+        </div>
+    </div>
+</div>
+
+<script>
+    // 登录按钮点击事件
+    document.getElementById('loginBtn').addEventListener('click', async ()=>{
+        const username = document.getElementById('loginUser').value.trim()
+        const password = document.getElementById('loginPwd').value.trim()
+
+        // 前端简单校验
+        if (!username || !password) {
+            alert("请输入账号和密码！")
+            return
+        }
+
+        try {
+            // 对接后端登录接口
+            const res = await fetch("http://47.108.20.237:3001/api/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password })
+            })
+            const data = await res.json()
+            alert(data.msg)
+
+            // ✅ 核心：登录成功，存用户名 + 跳转首页
+            if (data.code === 200) {
+                // 把当前登录的用户名，永久存在浏览器里（首页能读取）
+                localStorage.setItem("loginUsername", username)
+                // 跳转到 index.html 首页
+                window.location.href = "index2.html"
+            }
+        } catch (err) {
+            alert("登录请求失败，请检查后端是否启动！")
+            console.error(err)
+        }
+    })
+</script>
+</body>
+</html>
+
+<script>
+    // 登录按钮逻辑（对接本地后端）
+    document.getElementById('loginBtn').addEventListener('click', async ()=>{
+        let username = document.getElementById('loginUser').value.trim()
+        let password = document.getElementById('loginPwd').value.trim()
+
+        // 前端空值校验
+        if (!username || !password) {
+            alert('请输入账号和密码')
+            return
+        }
+
+        // ✅ 关键修改：改成本地后端地址
+        let res = await fetch("http://localhost:3001/api/login", {
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({
+                username: username,
+                password: password
+            })
+        })
+        let data = await res.json()
+        alert(data.msg)
+    })
+</script>
+
+
+<script src="./index.js"></script>
+<!-- 嵌入Coze智能体聊天窗口 + ✅ 原生title提示（光标一放必显示） -->
+<script>
+  new CozeWebSDK.WebChatClient({
+    config: {
+      bot_id: '7634345885346545679',
+    },
+    componentProps: {
+      title: '滇境生灵智能助手',
+      layout: "float",
+      tooltip: "滇境生灵智能助手"  // ✅ 这里直接设置原生提示，100%生效
+    },
+    auth: {
+      type: 'token',
+      token: 'pat_EtNINqzwFkGGlgx7j8NbVaMS2oGRNMKBsAIWWVUmdzjQeku0KyoxHPwEvFY3wsd3',
+      onRefreshToken: function () {
+        return 'pat_EtNINqzwFkGGlgx7j8NbVaMS2oGRNMKBsAIWWVUmdzjQeku0KyoxHPwEvFY3wsd3'
+      }
+    }
+  });
+
+  // ✅ 强制给按钮加上原生title，兜底必生效
+  setTimeout(() => {
+    const btn = document.querySelector('.coze-webchat-float-button');
+    if(btn) btn.title = "滇境生灵智能助手";
+  }, 1000);
+</script>
+
+
+</body>
+</html>
