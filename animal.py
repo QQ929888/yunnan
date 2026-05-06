@@ -116,7 +116,6 @@ def generate_main(animals):
                 <!-- 下拉菜单 -->
                 <div class="dropdown-menu">
                     <a href="shoucang.html" class="history-item">收藏</a >
-                    <a href=" " class="history-item">用户信息</a >
                     <a href="index.html" class="logout-item">退出登录</a >
                 </div>
             </div>
